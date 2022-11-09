@@ -10,9 +10,9 @@ sehingga perlu dikonversi menjadi format **csv** untuk memudahkan analisis. Data
 
 Data BPS memiliki format khusus seperti tabel pivot yang merangkum data dalam beberapa tahun.
 
-![Contoh data awal](/img/awal.png)
+![Contoh data awal](img/awal.png)
 
 Program ini dapat mengeksrak data esensia dan merubahnya ke dalam format yang lebih mudah untuk dianalisis.
 
-![Contoh hasil](/img/akhir.png)
+![Contoh hasil](img/akhir.png)
 
