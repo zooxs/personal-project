@@ -28,7 +28,7 @@ Panjang fetch efektif data dicari dengan persamaan berikut
 
 $$ F_{eff} = \frac{\sum X \cos \alpha}{\sum \cos \alpha} $$
 
-yang bersumbe dari (Thoresen, 2003).
+yang bersumber dari (Thoresen, 2003).
 
 ## Analisis
 
