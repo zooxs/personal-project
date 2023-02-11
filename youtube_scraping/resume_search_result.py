@@ -2,9 +2,11 @@ import json
 from pprint import pprint
 from glob import glob
 from pandas import DataFrame
-dir_files = './data/json_search/'
+dir_files = './data/json_search'
 
-ls_files = glob(f"{dir_files}*json")
+### list of json files containt several response from YouTube API
+ls_files = glob(f"{dir_files}/*json")
+
 
 resume_search = dict()
 
@@ -45,7 +47,7 @@ for js_files in ls_files:
 
 df = DataFrame(resume_search)
 df.to_csv(f"{dir_files}resume_research.csv", index=False)
-# print(df.shape)
+
 
 
 

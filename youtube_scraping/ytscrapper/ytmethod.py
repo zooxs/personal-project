@@ -1,11 +1,10 @@
 from googleapiclient.discovery import build
 import io
 import json
-# DEVELOPER_KEY = 'AIzaSyCHPNzLL2kPnc26D6XaAso6phBTJClMm1E'
+
 YOUTUBE_API_SERVICE_NAME = 'youtube'
 YOUTUBE_API_VERSION = 'v3'
-api_key_1 = 'AIzaSyCHPNzLL2kPnc26D6XaAso6phBTJClMm1E'
-api_key_2 = 'AIzaSyC9HB5ANIoIXV9q-7R3xEWKUzdBoTwDlOA'
+api_key_1 = 'use_your_api_in_this_variabel'
 def youtube_build():
     DEVELOPER_KEY = api_key_1
     YOUTUBE_API_SERVICE_NAME = 'youtube'

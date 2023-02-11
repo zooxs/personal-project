@@ -1,13 +1,9 @@
+### import few methods are used
 from ytscrapper.ytmethod import *
-# , thinspiration, fitspiration, body image
 key = "mukbang, nutrition, ASMR"
 # key = "thinspiration, fitspiration, body image"
 
-"""
-search videos based on keywords,
-get list of all information
-"""
-dir_target = './data/json_search/'
+dir_target = './data/json_search'
 pageToken = 'CKYEEAE'
 num_iter = 0
 json_files = dict()
@@ -23,6 +19,5 @@ while True:
     if num_iter == 7:
         break
 
-
-with open(f"{dir_target}search5.json", "w") as f:
+with open(f"{dir_target}/search5.json", "w") as f:
     json.dump(json_files, f)
