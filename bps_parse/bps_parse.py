@@ -42,10 +42,24 @@ def bps_parse(df) -> DataFrame:
             df1['satuan'] = unit
 
             ls_data.append(df1)
-    return pd.concat(ls_data).set_index([fields,'kelompok', 'jenis', 'satuan']).to_csv(name_of_file)
-    
-# data = pd.read_csv('./data_target/Produksi_Palawija_2017-2019.csv')
 
-for f in glob.glob('./data_csv/*csv'):
-    data = pd.read_csv(f)
-    data.pipe(bps_parse)
+    result = {
+        'kelompok': group,
+        'dataFrame': pd.concat(ls_data).set_index([fields,'kelompok', 'jenis', 'satuan'])
+    }
+    return result
+    
+ls_csv = glob.glob('data_csv/*csv')
+ls_df = list(pd.read_csv(i).pipe(bps_parse) for i in ls_csv)
+
+
+ls_kelompok_unik = set([result['kelompok'] for result in ls_df])
+
+for ku in ls_kelompok_unik:
+    ls_ku = [
+        hasil['dataFrame'] for hasil in ls_df if hasil['kelompok'] == ku
+    ]
+    
+    fileNames = f"output/Produksi_{ku}.csv"
+    pd.concat(ls_ku, axis=1).to_csv(fileNames)
+    
