@@ -1,4 +1,4 @@
-import pandas as pd
+from pandas import concat
 
 def bps_parse(df, separator=' '):
 
@@ -25,9 +25,6 @@ def bps_parse(df, separator=' '):
         title = df.columns[1]
         group = separator.join(title.split(separator)[1:])
         
-
-
-
     # daftar nama kolom awal
     old_col = df.columns[1:]
 
@@ -62,7 +59,7 @@ def bps_parse(df, separator=' '):
 
             ls_data.append(df1)
 
-    result = pd.concat(ls_data)
+    result = concat(ls_data)
 
     # pengisian nilai satuan jika terdapat pada jensi komoditas
     if unit == '':
