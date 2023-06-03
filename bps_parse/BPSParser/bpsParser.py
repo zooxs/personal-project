@@ -1,6 +1,6 @@
 import pandas as pd
 
-def bps_parse(df):
+def bps_parse(df, separator=' '):
 
     """Fungsi yang bertujuan untuk mengekstrak dan mentrasnformasikan data BPS ke dalam bentuk long table.
 
@@ -10,10 +10,24 @@ def bps_parse(df):
 
     # Penentuan variabel judul, golongan, jenis dan satuan data
     fields = df.columns[0]
-    title = '_'.join(df.columns[1].split('(')[0].split('_')[:-1]).replace('/', '_')
-    group = '_'.join(title.split('_')[1:])
-    unit = df.columns[1].split('(')[-1][:-1]
+    title = ''
+    unit = ''
+    group = None
     
+    
+    # Pengecekan satuan pada judul tabel
+
+    if '(' in df.columns[1]:
+        title = separator.join(df.columns[1].split('(')[0].split(separator)[:-1]).replace('/', separator)
+        group = separator.join(title.split(separator)[1:])
+        unit = df.columns[1].split('(')[-1][:-1]
+    else:
+        title = df.columns[1]
+        group = separator.join(title.split(separator)[1:])
+        
+
+
+
     # daftar nama kolom awal
     old_col = df.columns[1:]
 
@@ -32,7 +46,7 @@ def bps_parse(df):
     
     # mengganti nilai - dengan 0
     df = df.dropna(axis=0)[old_col].replace('-', '0')
-    name_of_file = f"./output/{title}_{year[0]}-{year[-1]}.csv"
+    
     
     ls_data = []
     for n,_ in enumerate(old_col):
@@ -42,14 +56,24 @@ def bps_parse(df):
             df1.columns = year
 
             df1[fields] = ls_field
-            df1['kelompok'] = group
-            df1['jenis'] = group if len(sub_class) == 1 else sub_class[m-1]
-            df1['satuan'] = unit
+            df1['Kelompok'] = group
+            df1['Jenis'] = group if len(sub_class) == 1 else sub_class[m-1]
+            df1['Satuan'] = unit
 
             ls_data.append(df1)
 
-    result = {
-        'kelompok': group,
-        'dataFrame': pd.concat(ls_data).set_index([fields,'kelompok', 'jenis', 'satuan'])
-    }
-    return result
+    result = pd.concat(ls_data)
+
+    # pengisian nilai satuan jika terdapat pada jensi komoditas
+    if unit == '':
+        expand_cols = result['Jenis'].str.split('(', expand=True)
+        result['Satuan'] = expand_cols[1].str.replace(')', '', regex=False)
+        result['Jenis'] = expand_cols[0]
+    
+    # mengganti case pada kolom daerah menjadi Title Case
+    result['Provinsi'] = result['Provinsi'].str.title()
+    
+    # penyusunan kolom data
+    oldCols = result.columns.to_list()
+    newCols = oldCols[-4:] + oldCols[:len(oldCols)-4]
+    return result[newCols]
