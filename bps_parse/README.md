@@ -10,11 +10,11 @@ Secara umum data yang tersedia di BPS memiliki format excel (**xlsx**). Data yan
 
 Data BPS memiliki format khusus seperti tabel pivot yang merangkum data dalam beberapa tahun.
 
-![Contoh data awal](img/awal.png)
+![Contoh data awal](img/contoh-data-bps.png)
 
 Program ini dapat mengeksrak data esensial dan merubahnya ke dalam format yang lebih mudah untuk dianalisis.
 
-![Contoh hasil](img/akhir.png)
+![Contoh hasil](img/contoh-data-output.png)
 
 # Pemakaian
 
