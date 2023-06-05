@@ -2,7 +2,18 @@
 
 ## Deskripsi *Project*
 
-Bertujuan untuk mengekstrak data video youtube berupa Judul, Deskripsi, *link* video, Kode negara kanal tsb. mengupload, Tanggal upload, Jumlah *like* dan *view* serta beberapa komentar yang tersedia. Output yang didapatkan adalah file excel atau csv berisi beberapa data berdasarkan *keywords* yang digunakan.
+Bertujuan untuk mengekstrak data video youtube seperti:
+
+- Judul video
+- Deskripsi video
+- Tautan video
+- Kode negara kanal tsb. mengupload video
+- Tanggal upload
+- Jumlah *like*
+- Jumlah *view*
+- Beberapa komentar teratas, jika tersedia
+
+Output yang didapatkan adalah file excel atau csv berisi beberapa data berdasarkan *keywords* yang digunakan.
 
 ## Persyaratan
 
@@ -27,7 +38,7 @@ Selain Python, YouTube API dapat digunakan pada bahasa pemrograman lainnya seper
 *Project* ini terdiri dari 2 folder berupa `data` berisi informasi yang didapatkan dan hasil akhir serta `ytscrapper` berisi kumpulan fungsi yang dibutuhkan. Untuk mendapatkan hasil yang diinginkan, *project* dibagi menjadi beberapa tahapan (berkas program) dengan fungsi masing-masing mulai dari mencari dan mendapatkan informasi awal dari keywords yang diberikan, mengkompilasi hasil pencarian, mendapatkan informasi statistik video (*like* dan *view*).
 
 | Berkas                       | Fungsi                                       |
-|------------------------------|----------------------------------------------|
+| ---------------------------- | -------------------------------------------- |
 | `search_videos.py`           | Mencari daftar video                         |
 | `resume_search_result.py`    | Mengkompilasi hasil pencarian                |
 | `video_statistic_comment.py` | Mendapatkan informasi statistik dan komentar |
@@ -122,4 +133,10 @@ Informasi beberapa komentar berada pada *key* `topLevelComment.snippet.textDispl
 
 Hasil akhir berupa file excel atau csv seperti di bawah ini:
 
-![](img/excel_result.png)
+| videoId     | channelId                | title                                                                                                        | description                                                                                                                                | publishAt            | videoUrl                                    | countries | likeCount | topLevelComment                                                                                                                                                                                                                                                                                                                                                                                           |
+| ----------- | ------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- | ------------------------------------------- | --------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| uotg530Aa7Q | UC0L1suV8pVgO4pCAIBNGx5w | Obsession with Instagram &#39;clean eating&#39; trend turns into eating disorder &#124; 60 Minutes Australia | A different form of eating disorder - Orthorexia nervosa - is on the rise due to the impact of social media. It involves a fixation on ... | 2018-10-29T09:00:07Z | https://www.youtube.com/watch?v=uotg530Aa7Q | AU        | 28858     | ['There is no comments']                                                                                                                                                                                                                                                                                                                                                                                  |
+| uotg530Aa7Q | UC0L1suV8pVgO4pCAIBNGx5w | Obsession with Instagram &#39;clean eating&#39; trend turns into eating disorder &#124; 60 Minutes Australia | A different form of eating disorder - Orthorexia nervosa - is on the rise due to the impact of social media. It involves a fixation on ... | 2018-10-29T09:00:07Z | https://www.youtube.com/watch?v=uotg530Aa7Q | AU        | 28858     | ['There is no comments']                                                                                                                                                                                                                                                                                                                                                                                  |
+| loeQ_2hKgOc | UCeLyqsQfOtDccvNQShKuvZw | Intermittent Fasting VLOG Daily Results 7/7/2021 Before and After                                            | INTERMITTENT FASTING My intermittent fasting schedule sometimes change if I have an event coming up or have a dinner ...                   | 2021-07-07T23:17:52Z | https://www.youtube.com/watch?v=loeQ_2hKgOc | US        | 17        | ['I love the fact you record on your phone', 'Wow great results Aida. So much respect for you. Working , vlogging, meal prepping, walking , and exercising. A lot on your plate but you’re doing it , girl you’re bad ass 💪', 'Ooops forgot to ask you.  Do you think the time change has anything to do with you losing so fast.  I know you said you were having your last meal at 3 now instead of 4'] |
+| loeQ_2hKgOc | UCeLyqsQfOtDccvNQShKuvZw | Intermittent Fasting VLOG Daily Results 7/7/2021 Before and After                                            | INTERMITTENT FASTING My intermittent fasting schedule sometimes change if I have an event coming up or have a dinner ...                   | 2021-07-07T23:17:52Z | https://www.youtube.com/watch?v=loeQ_2hKgOc | US        | 17        | ['I love the fact you record on your phone', 'Wow great results Aida. So much respect for you. Working , vlogging, meal prepping, walking , and exercising. A lot on your plate but you’re doing it , girl you’re bad ass 💪', 'Ooops forgot to ask you.  Do you think the time change has anything to do with you losing so fast.  I know you said you were having your last meal at 3 now instead of 4'] |
+
