@@ -10,6 +10,36 @@ Terdapat beberapa modul atau librari yang digunakan untuk keperluan analisis, di
 - Pandas untuk pengolahan data
 - Matplotlib dan Windrose untuk visualisasi data
 
+## Struktur Project
+
+Project ini terdiri dari beberapa folder berisi data angin, hasil analisis dan *source* dari program yang dijalankan. Program tersebut terdiri 4 berkas yang memiliki fungsi masing-masing.
+
+| Berkas                    	| Fungsi                                                        	|
+|---------------------------	|---------------------------------------------------------------	|
+| `ekstrak_data.py`         	| Mengekstrak dan mengkompilasi data mentah                     	|
+| `gelombang_mask.py`       	| Menentukan gelombang maksimum setelah analisis hindcasting    	|
+| `hindcasting.py`          	| Memprediksi tinggi gelombang menggunakan data kecepatan angin 	|
+| `visualisasi_windrose.py` 	| Memvisualisasikan windrose                                    	|
+
+
+```
+wave-hindcasting/
+├── data-angin/
+│   ├── EmdIndonesia_S02.299_E104.853_2004.txt
+│   └── ...
+├── data_output/
+│   └── ...
+└── src/
+    ├── ekstrak_data.py
+    ├── gelombang_maks.py
+    ├── hindcasting.py
+    └── visualisasi_windrose.py
+dataset.csv
+fetch_efektif.csv
+ref.bib
+README.md
+```
+
 ## Data
 
 Secara umum data yang digunakan pada analisis ini ada 2 yaitu data angin dan panjang fetch efektif di perairan.
@@ -22,7 +52,9 @@ Pada data angin ada 2 informasi penting yang diperlukan yaitu waktu, kecepatan d
 
 Data ini merupakan jarak terjauh dari titik tinjau terhadap darata terdekat untuk setiap arah.
 
-![Panjang fetch](img/fetch.png)
+
+
+<img src="img/fetch.png" width="70%">
 
 Panjang fetch efektif data dicari dengan persamaan berikut
 
@@ -40,9 +72,12 @@ Karena data angin berada dalam file yang terpisah, perlu dilakukan penyatuan dan
 
 ### Hindcasting
 
-![Diagram alir](img/flowchart1.svg)
-![Diagram alir - detail 1](img/flowchart2.svg)
-![Diagram alir - detail 2](img/flowchart3.svg)
+
+<img src="img/flowchart1.svg" width="70%">
+<img src="img/flowchart2.svg" width="70%">
+<img src="img/flowchart3.svg" width="70%">
+
+
 
 Langkah ini terdapat pada [file](./hindcasting.py)
 
@@ -52,7 +87,9 @@ Langkah ini dapat dilihat pada [file](./gelombang_maks.py).
 
 ### Visualisasi *Windrose*
 
-![Windrose](./data_output/windrose.png)
+
+<img src="data_output/windrose.png" width="70%">
+
 
 Visualisasi tersebut dapat dibuat dengan menggunakan data kecepatan dan arah angin. Langkah tersebut dapat dilihat pada [file](./visualisasi_windrose.py)
 
