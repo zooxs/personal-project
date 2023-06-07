@@ -5,7 +5,6 @@ import glob
 
 ### Menggabungkan data dengan kelompok komditas yang sama
 listCsv = glob.glob("data_csv/*csv")
-
 listDf = list(
     pd.read_csv(i).pipe(bps_parse, separator="_", fullResult=True) for i in listCsv
 )
