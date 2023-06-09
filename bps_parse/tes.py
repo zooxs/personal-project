@@ -9,8 +9,8 @@ listDf = list(
     pd.read_csv(i).pipe(bps_parse, separator="_", fullResult=True) for i in listCsv
 )
 listUniqueGroup = set([Df["kelompok"] for Df in listDf])
-for uniqueGroup in listUniqueGroup:
+for id, uniqueGroup in enumerate(listUniqueGroup):
     sameDf = [Df["data"] for Df in listDf if Df["kelompok"] == uniqueGroup]
-    fileNames = f"output/csv/Produksi_{uniqueGroup}.csv"
+    fileNames = f"output/csv/Produksi_{id}.csv"
     pd.concat(sameDf, axis=1).to_csv(fileNames)
 ###
