@@ -1,4 +1,8 @@
 from pandas import concat
+import pandas as pd
+import glob
+
+# ektraks single data
 
 
 def bps_parse(df, separator=" ", fullResult=False):
@@ -84,3 +88,18 @@ def bps_parse(df, separator=" ", fullResult=False):
 
     else:
         return result
+
+
+# ektraks multiple data
+def bulk_parse(pathInput, pathOutput, separator=" "):
+    listCsv = glob.glob(pathInput)
+    listDf = list(
+        pd.read_csv(i).pipe(bps_parse, separator=separator, fullResult=True)
+        for i in listCsv
+    )
+    listUniqueGroup = set([Df["kelompok"] for Df in listDf])
+    for id, uniqueGroup in enumerate(listUniqueGroup):
+        sameDf = [Df["data"] for Df in listDf if Df["kelompok"] == uniqueGroup]
+        fileNames = f"{pathOutput}/Produksi_{id}.csv"
+        print(f"Mengekstrak {fileNames}")
+        pd.concat(sameDf, axis=1).to_csv(fileNames)
