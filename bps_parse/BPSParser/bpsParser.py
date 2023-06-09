@@ -8,7 +8,7 @@ import glob
 def bps_parse(df, separator=" ", fullResult=False):
     """Fungsi yang bertujuan untuk mengekstrak dan mentrasnformasikan data BPS ke dalam bentuk long table.
 
-    :paramter df: Objek DataFrame
+    :parameter df: Objek DataFrame
     :return: Objek DataFrame
     """
 
@@ -91,12 +91,29 @@ def bps_parse(df, separator=" ", fullResult=False):
 
 
 # ektraks multiple data
-def bulk_parse(pathInput, pathOutput, separator=" "):
+def bulk_parse(pathInput, pathOutput, fileType="csv", separator=" "):
+    """Fungsi yang bertujuan untuk mengekstrak data dalam jumlah besar. Data tersebut diekstrak pada lokasi output yang diinginkan.
+
+    :parameter pathInput: lokasi data bps
+    :parameter pathOutput: lokasi output data bps
+    :parameter separator: tanda pisah yang digunakan
+    """
     listCsv = glob.glob(pathInput)
-    listDf = list(
-        pd.read_csv(i).pipe(bps_parse, separator=separator, fullResult=True)
-        for i in listCsv
-    )
+    listFileType = ["csv", "xlsx"]
+    listDf = []
+
+    if fileType == "csv":
+        listDf = list(
+            pd.read_csv(i).pipe(bps_parse, separator=separator, fullResult=True)
+            for i in listCsv
+        )
+
+    elif fileType == "xlsx":
+        listDf = list(
+            pd.read_excel(i).pipe(bps_parse, separator=separator, fullResult=True)
+            for i in listCsv
+        )
+
     listUniqueGroup = set([Df["kelompok"] for Df in listDf])
     for id, uniqueGroup in enumerate(listUniqueGroup):
         sameDf = [Df["data"] for Df in listDf if Df["kelompok"] == uniqueGroup]

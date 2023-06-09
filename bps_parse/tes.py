@@ -17,4 +17,4 @@ import glob
 pathInput = "data_csv/*csv"
 pathOutput = "output/"
 
-bulk_parse(pathInput, pathOutput, separator="_")
+bulk_parse(pathInput, pathOutput, fileType="txt", separator="_")
