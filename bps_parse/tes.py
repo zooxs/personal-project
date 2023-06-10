@@ -14,7 +14,7 @@ import glob
 #     fileNames = f"output/csv/Produksi_{id}.csv"
 #     pd.concat(sameDf, axis=1).to_csv(fileNames)
 ###
-pathInput = "data_csv/*csv"
-pathOutput = "output/"
+pathInput = "data_excel/*xlsx"
+pathOutput = "output/xlsx"
 
-bulk_parse(pathInput, pathOutput, fileType="txt", separator="_")
+bulk_parse(pathInput, pathOutput, fileType="xlsx")

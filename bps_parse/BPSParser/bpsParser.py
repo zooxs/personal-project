@@ -1,14 +1,15 @@
-from pandas import concat
+from pandas import concat, DataFrame
 import pandas as pd
 import glob
 
 # ektraks single data
 
 
-def bps_parse(df, separator=" ", fullResult=False):
+# ektraks satu data bps
+def bps_parse(df: DataFrame, separator=" ", fullResult=False):
     """Fungsi yang bertujuan untuk mengekstrak dan mentrasnformasikan data BPS ke dalam bentuk long table.
 
-    :parameter df: Objek DataFrame
+    :param df: Objek DataFrame
     :return: Objek DataFrame
     """
 
@@ -94,29 +95,29 @@ def bps_parse(df, separator=" ", fullResult=False):
 def bulk_parse(pathInput, pathOutput, fileType="csv", separator=" "):
     """Fungsi yang bertujuan untuk mengekstrak data dalam jumlah besar. Data tersebut diekstrak pada lokasi output yang diinginkan.
 
-    :parameter pathInput: lokasi data bps
-    :parameter pathOutput: lokasi output data bps
-    :parameter separator: tanda pisah yang digunakan
+    :param pathInput: lokasi data bps
+    :param pathOutput: lokasi output data bps
+    :param separator: tanda pisah yang digunakan
     """
-    listCsv = glob.glob(pathInput)
+    listDataBPS = glob.glob(pathInput)
     listFileType = ["csv", "xlsx"]
     listDf = []
 
     if fileType == "csv":
         listDf = list(
             pd.read_csv(i).pipe(bps_parse, separator=separator, fullResult=True)
-            for i in listCsv
+            for i in listDataBPS
         )
 
     elif fileType == "xlsx":
         listDf = list(
             pd.read_excel(i).pipe(bps_parse, separator=separator, fullResult=True)
-            for i in listCsv
+            for i in listDataBPS
         )
 
     listUniqueGroup = set([Df["kelompok"] for Df in listDf])
     for id, uniqueGroup in enumerate(listUniqueGroup):
         sameDf = [Df["data"] for Df in listDf if Df["kelompok"] == uniqueGroup]
-        fileNames = f"{pathOutput}/Produksi_{id}.csv"
+        fileNames = f"{pathOutput}/Hasil_Ekstrak_{id}.csv"
         print(f"Mengekstrak {fileNames}")
         pd.concat(sameDf, axis=1).to_csv(fileNames)
